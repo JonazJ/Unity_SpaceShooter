@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -16,10 +17,38 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
     private int score = 0;
 
-    void Start () {
+    //EndText
+    public Text endText;
+    private bool gameEnded;
 
-        StartCoroutine (SpawnWaves());
-        
+    void Start() {
+        gameEnded = false;
+        endText.gameObject.SetActive(false);
+        StartCoroutine(SpawnWaves());
+
+    }
+
+    void Update() {
+        if (gameEnded)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Scene level = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(level.name);
+            }
+        }
+    }
+
+    public void EndGame ()
+    {
+        gameEnded = true;
+        endText.gameObject.SetActive(true);
+    }
+
+    public void AddScore(int points)
+    {
+        score += points;
+        scoreText.text = "Score:" + score;
     }
 
     IEnumerator SpawnWaves() {
@@ -35,9 +64,5 @@ public class GameController : MonoBehaviour {
             }
         }
     }
-    void AddScore(int points)
-    {
-        score += points;
-        scoreText.text = "Score:" + points;
-    }
+   
 }

@@ -10,7 +10,6 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour {
 
-
     public float speed;
     public Boundary boundary;
     public float tilt;
@@ -20,9 +19,6 @@ public class PlayerController : MonoBehaviour {
     public Transform shotSpawn;
     public float fireRate;
     private float nextFire;
-
-
-
 
     void Update () {
         if (Input.GetKey("space") && Time.time > nextFire) {
@@ -49,6 +45,4 @@ public class PlayerController : MonoBehaviour {
             0.0f,
             GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
-
-
 }

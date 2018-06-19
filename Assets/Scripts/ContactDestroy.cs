@@ -29,13 +29,14 @@ public class ContactDestroy : MonoBehaviour {
 
         if (other.tag != "Player")
         {
-            controller.AddScore (10);
+            controller.AddScore(10);
         }
         //Destroy the collision object = bolt
         Destroy (other.gameObject);
 
         //Destroy the Bolt
         Destroy (gameObject);
+
         //Initiate explosion animation
         GameObject tmp = Instantiate(asteroidExplosion, transform.position, transform.rotation) as GameObject;
         Destroy(tmp, 1);
@@ -46,6 +47,8 @@ public class ContactDestroy : MonoBehaviour {
         {
            tmp = Instantiate (playerExplosion, other.transform.position, other.transform.rotation) as GameObject;
             Destroy(tmp, 1);
+
+            controller.EndGame();
         }
 	}
 }
